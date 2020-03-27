@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back-outline" slot="start" routerLink="/cart" color="primary"></ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button fill="outline" routerLink="/">Continue Shopping</ion-button>
+    </ion-buttons>
+    <ion-title>Checkout</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <form (ngSubmit)="checkout()">
+      <h3 class="ion-padding-start">Billing Address</h3>
+      <ion-row class="ion-align-items-center">
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Country</ion-label>
+            <ion-select>
+              <ion-select-option required value="us">United States</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Zip Code (Required)</ion-label>
+            <ion-input required type="text" pattern=[0,9]{5} minlength="5" maxlength="5"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col class="ion-margin-start">
+          <h3>Order Summary</h3>
+          <ion-item *ngFor="let i of checkoutItems">
+            <ion-thumbnail slot="start">
+              <img [src]="i.imgURL"/>
+            </ion-thumbnail>
+            <ion-label>
+              <h3>{{ i.quantity }} - {{ i.manufacturer }} {{ i.model }}</h3>
+            </ion-label>
+            <ion-label slot="end">
+              <h3>{{ i.total | currency }}</h3>
+            </ion-label>
+          </ion-item>
+          <ion-button type="submit">Complete Payment</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Name on Card</ion-label>
+            <ion-input required type="text" pattern="[a-z,A-Z]" [(ngModel)]="customer.email" name="email"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Card Number</ion-label>
+            <ion-input required type="tel" inputmode="numeric" [(ngModel)]="customer.cc" name="cc" pattern="[0-9\s]{13,19}" maxlength="19"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">MM / YY</ion-label>
+            <ion-input required type="month" pattern="[0-9]{2}/[0-9]{2}"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Security Code</ion-label>
+            <ion-input required type="text" pattern="[0-9]" minlength="3" maxlength="3"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+</ion-content>
