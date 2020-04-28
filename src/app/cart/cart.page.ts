@@ -10,15 +10,18 @@ import { AlertController } from '@ionic/angular';
 
 export class CartPage implements OnInit {
   items;
-
+  total;
+  
   constructor(
     private cartService: CartService,
     private alertController: AlertController
   ) { }
-
+    
   ngOnInit() {
     this.items = this.cartService.getItems();
+    this.total = this.cartService.getTotalSum();
   }
+
   
   async deleteAll() {
     const deleteAllItems = await this.alertController.create({
@@ -43,6 +46,7 @@ export class CartPage implements OnInit {
 
   delete(i: any){
     this.items = this.cartService.deleteItem(i);
+    this.ngOnInit();
   }
 
 }

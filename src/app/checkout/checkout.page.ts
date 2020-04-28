@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class CheckoutPage implements OnInit {
   checkoutItems = [];
+  total;
 
   customer: any = {
     email: null,
@@ -25,13 +26,15 @@ export class CheckoutPage implements OnInit {
 
   ngOnInit() {
     [...this.checkoutItems] = this.cartService.getItems();
+    this.total = this.cartService.getTotalSum();
   }
+  
 
   async checkout() {
     const checkoutAlert = await this.alertController.create({
       header: 'Thank you!',
       message: `We appreciate you shopping with us! An order confirmation email has been sent to ${this.customer.email}.`,
-      backdropDismiss: true,
+      backdropDismiss: false,
       buttons: 
         [
           {

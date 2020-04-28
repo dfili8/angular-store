@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-icon name="arrow-back-outline" slot="start" routerLink="/" color="primary"></ion-icon>
+      <ion-icon name="arrow-back-outline" slot="start" routerLink="/"></ion-icon>
     </ion-buttons>
     <ion-title>{{ loadedPhone.manufacturer }} {{ loadedPhone.model }}</ion-title>
     <ion-buttons slot="end">
@@ -30,14 +30,14 @@
             <form (ngSubmit)="add()" #phoneForm="ngForm">
               <ion-item color="light">
                 <ion-label position="floating">Select Qty:</ion-label>
-                <ion-input required maxlength="2" pattern="[1-9][0-9]?" [(ngModel)]="loadedPhone.quantity" name="quantity" (keyup)="getSubTotal()" #quantity="ngModel"></ion-input>
+                <ion-input required maxlength="2" pattern="[1-9][0-9]?" [(ngModel)]="loadedPhone.quantity" name="quantity" #quantity="ngModel"></ion-input>
               </ion-item>
               <ion-item *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)" color="light">
                 <ion-label *ngIf="quantity.errors.pattern" color="danger">Please enter a valid number</ion-label>
                 <ion-label *ngIf="quantity.errors.required" color="danger">Quantity is required</ion-label>
               </ion-item>
               <ion-item color="light" class="ion-no-padding">
-                <ion-button type="submit" size="default" [disabled]="!phoneForm.form.valid" class="ion-margin">Add to cart</ion-button>
+                <ion-button type="submit" size="default" [disabled]="!phoneForm.form.valid" class="ion-margin" (click)="getSubTotal()">Add to cart</ion-button>
               </ion-item>
             </form>
           </ion-list>

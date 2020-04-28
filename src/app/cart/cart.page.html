@@ -1,8 +1,8 @@
 <!-- HEADER -->
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-icon name="arrow-back-outline" slot="start" routerLink="/" color="primary"></ion-icon>
+      <ion-icon name="arrow-back-outline" slot="start" routerLink="/"></ion-icon>
     </ion-buttons>
     <ion-title>Shopping Cart</ion-title>
   </ion-toolbar>
@@ -20,8 +20,6 @@
             <ion-label>
               <h3>{{ item.manufacturer }} {{ item.model }}</h3>
               <h3>Qty: {{ item.quantity }}</h3>
-            </ion-label>
-            <ion-label slot="end">
               <h3>Subtotal: {{ item.total | currency }}</h3>
             </ion-label>
             <ion-buttons slot="end">
@@ -35,10 +33,19 @@
     </ion-row>
     <ion-row *ngIf="items.length > 0; else noItems">
       <ion-col size-md="6" offset-md="3">
-        <ion-buttons>
-          <ion-button color="danger" (click)="deleteAll()">Delete All</ion-button>
-          <ion-button fill="outline" routerLink="/checkout" color="success">Proceed to Checkout<ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
-        </ion-buttons>
+        <ion-row>
+          <ion-col>
+            <h1>Total: {{ total | currency }}</h1>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-buttons>
+              <ion-button color="danger" (click)="deleteAll()">Delete All</ion-button>
+              <ion-button fill="outline" routerLink="/checkout" color="success">Proceed to Checkout<ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
+            </ion-buttons>
+          </ion-col>
+        </ion-row>
       </ion-col>
     </ion-row>
     <ion-row>
