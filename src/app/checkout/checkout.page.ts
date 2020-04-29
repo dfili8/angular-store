@@ -14,8 +14,7 @@ export class CheckoutPage implements OnInit {
 
   customer: any = {
     email: null,
-    phoneNum: "5866905097",
-    cc: null,
+    phoneNum: null,
   }
 
   constructor(

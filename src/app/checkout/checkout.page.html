@@ -12,39 +12,73 @@
 
 <ion-content>
   <ion-grid>
-    <form (ngSubmit)="checkout()">
+    <form (ngSubmit)="checkout()" #checkoutForm="ngForm">
       <ion-row class="ion-justify-content-center">
         <div class="container">
           <ion-col size="8">
-            <h3 class="ion-padding-start">Billing Address</h3>
+            <h3 class="ion-padding-start">Shipping Information</h3>
             <ion-row>
-              <ion-col size-lg="8" size-sm="6">
+              <ion-col size="12">
                 <ion-item>
-                  <ion-label position="floating">Country</ion-label>
-                  <ion-select>
-                    <ion-select-option required value="us">United States</ion-select-option>
-                  </ion-select>
-                </ion-item>
-              </ion-col>
-              <ion-col size-lg="4" size-sm="6">
-                <ion-item>
-                  <ion-label position="floating">Zip Code</ion-label>
-                  <ion-input required type="tel" inputmode="numeric" pattern=[0,9]{5,5} minlength="5" maxlength="5"></ion-input>
+                  <ion-label position="floating">Name</ion-label>
+                  <ion-input required type="text" pattern="[a-z,A-Z]"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
-            <h3 class="ion-padding-start">Card Information</h3>
+            <ion-row>
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="floating">Street Address</ion-label>
+                  <ion-input required type="text" pattern="[0-9],[a-z,A-Z]"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="floating">City</ion-label>
+                  <ion-input required type="text" pattern="[a-z,A-Z]"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-label position="floating">State</ion-label>
+                  <ion-input required type="text" pattern="[a-z,A-Z]{2}" minlength="2" maxlength="2"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-label position="floating">Zip Code</ion-label>
+                  <ion-input required inputmode="numeric" pattern="[0-9]" minlength="5" maxlength="5"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="floating">Phone Number</ion-label>
+                  <ion-input type="tel" inputmode="numeric" pattern="[0-9]"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="floating">Email Address</ion-label>
+                  <ion-input required type="email" [(ngModel)]="customer.email" name="email"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <h3 class="ion-padding-start">Debit/Credit Card Information</h3>
             <ion-row>
               <ion-col size="12">
                 <ion-item>
                   <ion-label position="floating">Name on Card</ion-label>
-                  <ion-input required type="text" pattern="[a-z,A-Z]" [(ngModel)]="customer.email" name="email"></ion-input>
+                  <ion-input required type="text" pattern="[a-z,A-Z]"></ion-input>
                 </ion-item>
               </ion-col>
               <ion-col size="12">
                 <ion-item>
                   <ion-label position="floating">Card Number</ion-label>
-                  <ion-input required type="tel" inputmode="numeric" [(ngModel)]="customer.cc" name="cc" pattern="[0-9\s]{13,19}" maxlength="19"></ion-input>
+                  <ion-input required type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" maxlength="19"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -75,7 +109,7 @@
                   </ion-label>
                 </ion-item>
                 <h1>Total: {{ total | currency }}</h1>
-                <ion-button type="submit" class="ion-margin-top">Complete Payment</ion-button>
+                <ion-button type="submit" [disabled]="!checkoutForm.form.valid" class="ion-margin-top">Complete Payment</ion-button>
               </ion-col>
             </ion-row>
           </ion-col>
